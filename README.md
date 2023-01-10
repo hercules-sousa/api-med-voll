@@ -57,3 +57,13 @@ O exemplo de código acima possui algumas anotações:
 - @RestController: serve para indicar que a classe abaixo é um controller de uma API do tipo REST.
 - @RequestMapping: vai dizer qual é a url que esse controller vai mapear.
 - @GetMapping: indica que o método abaixo vai responder a requisições do tipo get.
+
+## Configurando o DevTools
+
+O DevTools é uma ferramenta de desenvolvimento bastante útil, ela serve para que nós desenvolvedores não precisemos ficar reiniciando a aplicação manualmente toda vez que modificações são feitas e salvas na nossa aplicação.
+
+Para configurar essa dependência você deve:
+
+1. Abrir o menu de configurações e selecionar a opção `Build, Execution, Deployment`.
+2. Selecionar a opção `Compiler` e marcar a caixa ao lado de `Build project automatically`.
+3. Ainda no menu lateral, você deve abrir a opção de Advanced Settings e marcar o checkbox com o texto `Allow auto-make to start even if developed application is currently running`.
