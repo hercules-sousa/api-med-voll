@@ -67,3 +67,7 @@ Para configurar essa dependência você deve:
 1. Abrir o menu de configurações e selecionar a opção `Build, Execution, Deployment`.
 2. Selecionar a opção `Compiler` e marcar a caixa ao lado de `Build project automatically`.
 3. Ainda no menu lateral, você deve abrir a opção de Advanced Settings e marcar o checkbox com o texto `Allow auto-make to start even if developed application is currently running`.
+
+## Spring Boot Security Authentication with JPA, Hibernate and MySQL
+
+[Tutorial utilizado](https://www.codejava.net/frameworks/spring-boot/spring-boot-security-authentication-with-jpa-hibernate-and-mysql)
