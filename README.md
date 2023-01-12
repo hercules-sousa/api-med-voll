@@ -97,6 +97,24 @@ public class CorsConfiguration implements WebMvcConfigurer {
 }
 ```
 
+## Recebendo dados de uma requisição com Java 17
+
+Para receber os dados de uma requisição é preciso que anotemos o parâmetro da função com `@RequestBody`.
+
+Um dos padrões utilizados para mandar e receber dados de requisições em uma API REST é o padrão **DTO ─ Data Transfer Object**, sua principal vantagem é o aumento de flexibilidade na hora de enviar e receber o conteúdo das requisições, isto porque nem sempre todos os campos que obtemos serão reenviados no retorno. Aqui no curso iremos usar o Record como uma forma de criar esses DTOs. A seguir está o exemplo de como foi criado o DTO dos dados de cadastro de um médico.
+
+```java
+package med.voll.api.data;
+
+public record DadosCadastroMedico(String nome,
+                                  String email,
+                                  String telefone,
+                                  String crm,
+                                  EnumEspecialidade especialidade,
+                                  DadosEndereco endereco) {
+}
+```
+
 ## Spring Boot Security Authentication with JPA, Hibernate and MySQL
 
 [Tutorial utilizado](https://www.codejava.net/frameworks/spring-boot/spring-boot-security-authentication-with-jpa-hibernate-and-mysql)
