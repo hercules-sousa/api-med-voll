@@ -8,7 +8,7 @@ As tecnologias utilizadas serão:
 - **Spring Boot** 3: a nova versão do Spring Boot disponibilizada no final do ano passado
 - **Java 17**: a versão LTS mais recente dessa linguagem de programação
 - **Lombok**: para evitar o uso de códigos boilerplate
-- **MySQL / Flyway**: sendo o MySQL o no SGDB e o Flyway a nossa ferramenta de [schema migrations](https://www.cloudbees.com/blog/database-migration)
+- **MySQL / Flyway**: sendo o MySQL o SGDB utilizado e o Flyway a nossa ferramenta de [schema migrations](https://www.cloudbees.com/blog/database-migration)
 - **JPA / Hibernate**: para implementar a interação com o banco de dados.
 - **Maven**: ferramenta de controle de dependências
 - **Insomnia**: para testar a nossa API
@@ -67,6 +67,35 @@ Para configurar essa dependência você deve:
 1. Abrir o menu de configurações e selecionar a opção `Build, Execution, Deployment`.
 2. Selecionar a opção `Compiler` e marcar a caixa ao lado de `Build project automatically`.
 3. Ainda no menu lateral, você deve abrir a opção de Advanced Settings e marcar o checkbox com o texto `Allow auto-make to start even if developed application is currently running`.
+
+## Entendendo um pouco sobre CORS
+
+Por questões de segurança existe uma política de requisições que podem ou não ser feitas a uma determinada API, é a chamada *same-origin policy*, que restringe o consumo dos recursos feitos de uma origem a uma outra origem. Por padrão uma API só pode consumir os recursos que estão presentes em uma outra URL de mesmo protocolo e origem.
+
+Considere a seguinte URL: [https://cursos.alura.com.br/category/programacao](https://cursos.alura.com.br/category/programacao).
+
+Vamos agora mapear quais outras URLs poderiam fazer requisições a esta acima e dizer o porquê não poderiam.
+
+| URL | Resultado | Motivo |
+| --- | --- | --- |
+| https://cursos.alura.com.br/category/front-end | Mesma origem | Apenas o caminho está diferente |
+| http://cursos.alura.com.br/category/programacao | Erro de CORS | Protocolo diferente (http) |
+| https://faculdade.alura.com.br:80/category/programacao | Erro de CORS | Origem diferente (faculdade) |
+
+Contudo, muitas vezes nós precisamos realizar requisições a outras aplicações que não estão no mesmo protocolo e origem. Para fazer isso existe um header chamado de *Access-Control-Allow-Origin* que indica quais endereços possuem permissão de realizar requisições para a URL em questão. Para realizar essa configuração no Spring Boot devemos criar um arquivo da seguinte maneira:
+
+```java
+@Configuration
+public class CorsConfiguration implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+            .allowedOrigins("http://localhost:3000")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
+    }
+}
+```
 
 ## Spring Boot Security Authentication with JPA, Hibernate and MySQL
 
